@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     ftp1.vm.post_up_message = "Run vm for FTP1"
 
     ftp1.vm.provider :virtualbox do |vb|
-      vb.memory = "2048"
+      vb.memory = "500"
     end
 
     ftp1.vm.provision "shell" do |s|
