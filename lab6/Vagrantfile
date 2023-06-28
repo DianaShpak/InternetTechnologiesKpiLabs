@@ -1,0 +1,60 @@
+Vagrant.configure("2") do |config|
+
+    # config.vm.define "app1" do |app1|
+    #   app1.vm.box_download_insecure = true
+    #   app1.vm.box = "ubuntu/xenial64"
+
+    #   app1.vm.network :private_network, ip: "172.20.1.151"
+
+    #   app1.vm.hostname = "app1"
+    #   app1.vm.post_up_message = "Run vm for app1"
+
+    #   app1.vm.provider :virtualbox do |vb|
+    #       vb.memory = "500"
+    #   end
+
+    #   app1.vm.provision "shell" do |s|
+    #       s.path = 'script1.sh'
+    #   end
+    # end
+
+    # config.vm.define "app2" do |app2|
+    #   app2.vm.box_download_insecure = true
+    #   app2.vm.box = "ubuntu/xenial64"
+
+    #   app2.vm.network :private_network, ip: "172.20.1.152"
+
+    #   app2.vm.hostname = "app2"
+    #   app2.vm.post_up_message = "Run vm for app2"
+
+    #   app2.vm.provider :virtualbox do |vb|
+    #       vb.memory = "500"
+    #   end
+
+    #   app2.vm.provision "shell" do |s|
+    #       s.path = 'script2.sh'
+    #   end
+    # end
+
+    config.vm.define "balancer" do |balancer|
+      balancer.vm.box_download_insecure = true
+      balancer.vm.box = "ubuntu/xenial64"
+
+      balancer.vm.network :private_network, ip: "172.20.1.153"
+      balancer.vm.network "forwarded_port", guest: 8081, host: 8081
+      balancer.vm.network "forwarded_port", guest: 8444, host: 8444
+
+      balancer.vm.hostname = "balancer"
+      balancer.vm.post_up_message = "Run vm for balancer"
+
+      balancer.vm.provider :virtualbox do |vb|
+          vb.memory = "500"
+      end
+
+      balancer.vm.provision "shell" do |s|
+          s.path = 'script3.sh'
+      end
+    end
+end
+
+

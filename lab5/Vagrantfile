@@ -1,0 +1,35 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "samba" do |samba|
+    samba.vm.box_download_insecure = true
+    samba.vm.box = "ubuntu/bionic64"
+    samba.vm.network :private_network, ip: "172.20.1.110"
+
+    samba.vm.hostname = "samba"
+    samba.vm.post_up_message = "Run vm for Samba"
+
+    samba.vm.provider :virtualbox do |vb|
+      vb.memory = "2048"
+    end
+
+    samba.vm.provision "shell" do |s|
+      s.path = 'master.sh'
+    end
+  end
+
+  config.vm.define "smbclient" do |smbclient|
+    smbclient.vm.box_download_insecure = true
+    smbclient.vm.box = "ubuntu/bionic64"
+    smbclient.vm.network :private_network, ip: "172.20.1.111"
+
+    smbclient.vm.hostname = "smbclient"
+    smbclient.vm.post_up_message = "Run vm for smbclient"
+
+    smbclient.vm.provider :virtualbox do |vb|
+      vb.memory = "2048"
+    end
+
+    smbclient.vm.provision "shell" do |s|
+      s.path = 'master.sh'
+    end
+  end
+end

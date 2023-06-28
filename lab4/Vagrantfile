@@ -1,0 +1,52 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "nfs" do |nfs|
+    nfs.vm.box_download_insecure = true
+    nfs.vm.box = "ubuntu/bionic64"
+    nfs.vm.network :private_network, ip: "172.20.1.90"
+
+    nfs.vm.hostname = "nfs"
+    nfs.vm.post_up_message = "Run vm for NFS"
+
+    nfs.vm.provider :virtualbox do |vb|
+      vb.memory = "2048"
+    end
+
+    nfs.vm.provision "shell" do |s|
+      s.path = 'master.sh'
+    end
+  end
+
+  config.vm.define "clientnfs0" do |clientnfs0|
+    clientnfs0.vm.box_download_insecure = true
+    clientnfs0.vm.box = "ubuntu/bionic64"
+    clientnfs0.vm.network :private_network, ip: "172.20.1.100"
+
+    clientnfs0.vm.hostname = "clientnfs0"
+    clientnfs0.vm.post_up_message = "Run vm for client nfs"
+
+    clientnfs0.vm.provider :virtualbox do |vb|
+      vb.memory = "2048"
+    end
+
+    clientnfs0.vm.provision "shell" do |s|
+      s.path = 'master.sh'
+    end
+  end
+
+  config.vm.define "clientnfs1" do |clientnfs1|
+    clientnfs1.vm.box_download_insecure = true
+    clientnfs1.vm.box = "ubuntu/bionic64"
+    clientnfs1.vm.network :private_network, ip: "172.20.1.101"
+
+    clientnfs1.vm.hostname = "clientnfs1"
+    clientnfs1.vm.post_up_message = "Run vm for client nfs"
+
+    clientnfs1.vm.provider :virtualbox do |vb|
+      vb.memory = "2048"
+    end
+
+    clientnfs1.vm.provision "shell" do |s|
+      s.path = 'master.sh'
+    end
+  end
+end

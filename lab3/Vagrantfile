@@ -1,0 +1,20 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.define "ftp1" do |ftp1|
+    ftp1.vm.box_download_insecure = true
+    ftp1.vm.box = "ubuntu/bionic64"
+    ftp1.vm.network :private_network, ip: "172.20.1.80"
+    ftp1.vm.network "forwarded_port", guest: 22, host: 22
+
+    ftp1.vm.hostname = "ftp1"
+    ftp1.vm.post_up_message = "Run vm for FTP1"
+
+    ftp1.vm.provider :virtualbox do |vb|
+      vb.memory = "2048"
+    end
+
+    ftp1.vm.provision "shell" do |s|
+      s.path = 'ftp1.sh'
+    end
+  end
+end

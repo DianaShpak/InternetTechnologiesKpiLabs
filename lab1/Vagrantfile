@@ -1,0 +1,43 @@
+Vagrant.configure("2") do |config|
+    
+    config.vm.define "dnsfirst" do |dnsfirst|
+      dnsfirst.vm.box_download_insecure = true
+      dnsfirst.vm.box = "ubuntu/xenial64"
+
+      dnsfirst.vm.network :private_network, ip: "192.168.0.10"
+      dnsfirst.vm.network "forwarded_port", guest: 53, host: 53
+
+      dnsfirst.vm.hostname = "dnsfirst"
+      dnsfirst.vm.post_up_message = "Run vm for dnsfirst"
+
+      dnsfirst.vm.provider :virtualbox do |vb|
+          vb.memory = "1024"
+      end
+
+      dnsfirst.vm.provision "shell" do |s|
+          s.path = 'dns_first.sh'
+      end
+    end
+
+    config.vm.define "dnsreserve" do |dnsreserve|
+      dnsreserve.vm.box_download_insecure = true
+      dnsreserve.vm.box = "ubuntu/xenial64"
+
+      dnsreserve.vm.network :private_network, ip: "192.168.0.20"
+      dnsreserve.vm.network "forwarded_port", guest: 53, host: 5353
+
+      dnsreserve.vm.hostname = "dnsreserve"
+      dnsreserve.vm.post_up_message = "Run vm for dnsreserve"
+
+      dnsreserve.vm.provider :virtualbox do |vb|
+          vb.memory = "1024"
+      end
+
+      dnsreserve.vm.provision "shell" do |s|
+          s.path = 'dns_reserve.sh'
+      end
+    end
+
+end
+
+

@@ -1,0 +1,38 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "letter" do |letter|
+      letter.vm.box_download_insecure = true
+      letter.vm.box = "ubuntu/bionic64"
+      letter.vm.network :private_network, ip: "172.20.1.60"
+      dnsfirst.vm.network "forwarded_port", guest: 8080, host: 53
+      letter.vm.hostname = "letter"
+      letter.vm.post_up_message = "Run vm for letter"
+
+      letter.vm.provider :virtualbox do |vb|
+          vb.memory = "1024"
+      end
+
+      letter.vm.provision "shell" do |s|
+          s.path = 'server1.sh'
+      end
+    end
+
+    config.vm.define "zone01" do |zone01|
+      zone01.vm.box_download_insecure = true
+      zone01.vm.box = "ubuntu/xenial64"
+      zone01.vm.network :private_network, ip: "172.20.1.70"
+
+      zone01.vm.hostname = "zone01"
+      zone01.vm.post_up_message = "Run vm for zone01"
+
+      zone01.vm.provider :virtualbox do |vb|
+          vb.memory = "1024"
+      end
+
+      zone01.vm.provision "shell" do |s|
+          s.path = 'server2.sh'
+      end
+    end
+
+end
+
+
