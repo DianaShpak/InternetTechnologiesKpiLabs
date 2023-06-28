@@ -1,12 +1,11 @@
 #!/bin/bash
-echo "WS_2"
 sudo apt update
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # # Create self signed cert for HTTPS reverse proxy as Nginx
 openssl genrsa -out /tmp/app.key 2048
-openssl req -new -key /tmp/app.key -out /tmp/app.csr -subj "/C=CA/ST=ON/L=Toronto/O=Digital/OU=IT/CN=app.local.com"
+openssl req -new -key /tmp/app.key -out /tmp/app.csr -subj "/C=UA/ST=Ukraine/L=Kyiv/O=KPI/OU=OT/CN=letter CA"
 openssl x509 -req -days 365 -in /tmp/app.csr -signkey /tmp/app.key -out /tmp/app.crt
 sudo chmod 644 /tmp/app.crt /tmp/app.key
 echo "self signed cert done" >> /tmp/debug.log
