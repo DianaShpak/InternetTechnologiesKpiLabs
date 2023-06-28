@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
       dnsfirst.vm.post_up_message = "Run vm for dnsfirst"
 
       dnsfirst.vm.provider :virtualbox do |vb|
-          vb.memory = "1024"
+          vb.memory = "300"
       end
 
       dnsfirst.vm.provision "shell" do |s|
@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
       dnsreserve.vm.post_up_message = "Run vm for dnsreserve"
 
       dnsreserve.vm.provider :virtualbox do |vb|
-          vb.memory = "1024"
+          vb.memory = "300"
       end
 
       dnsreserve.vm.provision "shell" do |s|
