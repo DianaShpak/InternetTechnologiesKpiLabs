@@ -212,19 +212,19 @@ cat <<EOT >> db.20.172
 ; name servers
       IN      NS      alpha.zone01.com.
       IN      NS      beta.zone01.com.
-      IN      NS      gamma.letter.com.
-      IN      NS      delta.letter.com.
-      IN      NS      omega.letter.com.
-      IN      NS      ftp.letter.com.
+      IN      NS      gamma.letter.net.
+      IN      NS      delta.letter.net.
+      IN      NS      omega.letter.net.
+      IN      NS      ftp.letter.net.
 
 ; PTR Records
 
 10.1.20.172.in-addr.arpa.   IN PTR alpha.zone01.com.   ;172.20.1.10
 20.1.20.172.in-addr.arpa.   IN PTR beta.zone01.com.    ;172.20.1.20
-30.1.20.172.in-addr.arpa.   IN PTR gamma.letter.com.   ;172.20.1.30
-40.1.20.172.in-addr.arpa.   IN PTR delta.letter.com.   ;172.20.1.40
-50.1.20.172.in-addr.arpa.   IN PTR omega.letter.com.   ;172.20.1.50
-80.1.20.172.in-addr.arpa.   IN PTR ftp.letter.com.     ;172.20.1.80
+30.1.20.172.in-addr.arpa.   IN PTR gamma.letter.net.   ;172.20.1.30
+40.1.20.172.in-addr.arpa.   IN PTR delta.letter.net.   ;172.20.1.40
+50.1.20.172.in-addr.arpa.   IN PTR omega.letter.net.   ;172.20.1.50
+80.1.20.172.in-addr.arpa.   IN PTR ftp.letter.net.     ;172.20.1.80
 
 EOT
 
